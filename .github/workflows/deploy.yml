@@ -24,54 +24,55 @@ jobs:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << EOF
-          sudo apt update
-          sudo apt install -y nginx git nodejs npm certbot python3-certbot-nginx
-          sudo systemctl enable nginx
-          sudo systemctl start nginx
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo apt update && sudo apt install -y nginx git nodejs npm certbot python3-certbot-nginx && sudo systemctl enable nginx && sudo systemctl start nginx'
 
-          # Set up directories for blue-green deployment
-          sudo mkdir -p /var/www/html/blue /var/www/html/green
-          sudo chown -R $EC2_USER:$EC2_USER /var/www/html
+    - name: Setup blue-green directories
+      env:
+        EC2_HOST: ${{ secrets.EC2_HOST }}
+        EC2_USER: ${{ secrets.EC2_USER }}
+      run: |
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo mkdir -p /var/www/html/blue /var/www/html/green && sudo chown -R '"$EC2_USER"':'"$EC2_USER"' /var/www/html'
 
-          # Configure Nginx for blue-green deployment
-          echo "server {
-    listen 80;
-    server_name www.d3vops.xyz;
+    - name: Configure Nginx for blue-green deployment
+      env:
+        EC2_HOST: ${{ secrets.EC2_HOST }}
+        EC2_USER: ${{ secrets.EC2_USER }}
+      run: |
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo tee /etc/nginx/sites-available/blue_green > /dev/null <<NGINX_CONFIG
+        server {
+            listen 80;
+            server_name www.d3vops.xyz;
+            root /var/www/html/blue;
+            index index.html;
+            location / {
+                try_files \$uri \$uri/ =404;
+            }
+        }
+        server {
+            listen 80;
+            server_name staging.d3vops.xyz;
+            root /var/www/html/green;
+            index index.html;
+            location / {
+                try_files \$uri \$uri/ =404;
+            }
+        }
+        NGINX_CONFIG
+        '
 
-    root /var/www/html/blue;
-    index index.html;
-
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-}
-
-server {
-    listen 80;
-    server_name staging.d3vops.xyz;
-
-    root /var/www/html/green;
-    index index.html;
-
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-}" | sudo tee /etc/nginx/sites-available/blue_green > /dev/null
-
-          sudo ln -sf /etc/nginx/sites-available/blue_green /etc/nginx/sites-enabled/
-          sudo nginx -t
-          sudo systemctl reload nginx
-EOF
+    - name: Enable Nginx configuration
+      env:
+        EC2_HOST: ${{ secrets.EC2_HOST }}
+        EC2_USER: ${{ secrets.EC2_USER }}
+      run: |
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo ln -sf /etc/nginx/sites-available/blue_green /etc/nginx/sites-enabled/ && sudo nginx -t && sudo systemctl reload nginx'
 
     - name: Deploy to Green environment
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << EOF
-          sudo rm -rf /var/www/html/green/*
-EOF
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo rm -rf /var/www/html/green/*'
         scp -o StrictHostKeyChecking=no -r * $EC2_USER@$EC2_HOST:/var/www/html/green/
 
     - name: Configure SSL for blue and green environments
@@ -79,10 +80,7 @@ EOF
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << EOF
-          sudo certbot --nginx -d www.d3vops.xyz -d staging.d3vops.xyz --non-interactive --agree-tos --email admin@d3vops.xyz
-          sudo systemctl reload nginx
-EOF
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo certbot --nginx -d www.d3vops.xyz -d staging.d3vops.xyz --non-interactive --agree-tos --email admin@d3vops.xyz && sudo systemctl reload nginx'
 
     - name: Manual Approval to Switch Live Environment
       uses: hmarr/auto-approve-action@v3.1.0
@@ -93,10 +91,4 @@ EOF
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << EOF
-          sudo mv /var/www/html/blue /var/www/html/blue_bak
-          sudo mv /var/www/html/green /var/www/html/blue
-          sudo mkdir -p /var/www/html/green
-          sudo nginx -t
-          sudo systemctl reload nginx
-EOF
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo mv /var/www/html/blue /var/www/html/blue_bak && sudo mv /var/www/html/green /var/www/html/blue && sudo mkdir -p /var/www/html/green && sudo nginx -t && sudo systemctl reload nginx'
