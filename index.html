@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevSecOps Hunter's Journal</title>
+    <title>DevSecOps - The Digital Throne</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Orbitron:wght@400;700;900&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,305 +14,429 @@
         }
         
         body {
-            background-color: #1a1410;
+            background: #0a0e27;
             background-image: 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><text x="50" y="50" font-size="40" text-anchor="middle" opacity="0.03" fill="%23d4a574">⛤</text></svg>'),
-                linear-gradient(180deg, #1a1410 0%, #0d0a08 100%);
-            background-repeat: repeat;
-            color: #d4a574;
-            font-family: 'Georgia', serif;
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 128, 0.05) 0%, transparent 40%),
+                linear-gradient(180deg, #0a0e27 0%, #1a1a2e 50%, #0a0e27 100%);
+            color: #e0e0e0;
+            font-family: 'Orbitron', sans-serif;
             line-height: 1.8;
             min-height: 100vh;
+            overflow-x: hidden;
         }
         
         header {
-            background: linear-gradient(180deg, #2d1f14 0%, #1a1410 100%);
-            border-bottom: 3px solid #8b6f47;
-            padding: 30px 20px;
+            background: linear-gradient(180deg, rgba(10, 14, 39, 0.95) 0%, rgba(26, 26, 46, 0.95) 100%);
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, #00ffff, #ff0080, #00ffff) 1;
+            padding: 40px 20px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2);
             position: relative;
+            overflow: hidden;
         }
         
         header::before {
-            content: "🔥";
+            content: '';
             position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2em;
-            opacity: 0.6;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
         }
         
-        header::after {
-            content: "🔥";
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2em;
-            opacity: 0.6;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.6; }
         }
         
         header h1 {
-            color: #d4a574;
-            font-size: 2.8em;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-            margin-bottom: 10px;
-            font-family: 'Georgia', serif;
+            font-family: 'Cinzel', serif;
+            color: #00ffff;
+            font-size: 3.5em;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 
+                0 0 10px rgba(0, 255, 255, 0.8),
+                0 0 20px rgba(0, 255, 255, 0.6),
+                0 0 30px rgba(0, 255, 255, 0.4),
+                0 5px 10px rgba(0, 0, 0, 0.9);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .crown {
+            font-size: 1.5em;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
         }
         
         .subtitle {
-            color: #8b6f47;
-            font-size: 1.2em;
+            font-family: 'Cinzel', serif;
+            color: #ff0080;
+            font-size: 1.3em;
             font-style: italic;
-            letter-spacing: 1px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 0, 128, 0.6);
+            position: relative;
+            z-index: 1;
         }
         
-        .warning {
-            background: rgba(139, 0, 0, 0.3);
-            border: 2px solid #8b0000;
-            padding: 10px;
-            margin: 15px auto;
-            max-width: 600px;
-            text-align: center;
-            font-size: 0.9em;
-            color: #ff6b6b;
+        .realm-status {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00ffff;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        
+        .realm-status .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .realm-status .stat-label {
+            font-size: 0.8em;
+            color: #888;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         
+        .realm-status .stat-value {
+            font-size: 1.2em;
+            color: #00ffff;
+            font-weight: bold;
+            margin-top: 5px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+        }
+        
         nav {
-            background: #2d1f14;
+            background: rgba(10, 14, 39, 0.9);
             text-align: center;
-            padding: 15px;
-            border-bottom: 2px solid #4a3621;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-bottom: 1px solid #00ffff;
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.1);
         }
         
         nav a {
-            color: #d4a574;
+            color: #00ffff;
             text-decoration: none;
-            margin: 0 25px;
-            font-weight: bold;
+            margin: 0 30px;
+            font-weight: 700;
             font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             transition: all 0.3s ease;
-            padding: 8px 15px;
+            padding: 10px 20px;
             display: inline-block;
-            border-bottom: 2px solid transparent;
-        }
-        
-        nav a:hover {
-            color: #ffd700;
-            border-bottom-color: #ffd700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-        
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        
-        section {
-            background: rgba(45, 31, 20, 0.6);
-            border: 2px solid #4a3621;
-            border-left: 5px solid #8b6f47;
-            margin-bottom: 30px;
-            padding: 35px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            border: 2px solid transparent;
             position: relative;
         }
         
-        section::before {
-            content: "⛤";
+        nav a::before {
+            content: '';
             position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 2em;
-            opacity: 0.15;
-            color: #8b6f47;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #ff0080);
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: #ff0080;
+            text-shadow: 0 0 15px rgba(255, 0, 128, 0.8);
+        }
+        
+        nav a:hover::before {
+            width: 100%;
+        }
+        
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        section {
+            background: rgba(26, 26, 46, 0.7);
+            border: 2px solid transparent;
+            border-image: linear-gradient(135deg, #00ffff, transparent, #ff0080) 1;
+            margin-bottom: 50px;
+            padding: 40px;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.5),
+                inset 0 0 30px rgba(0, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #00ffff, transparent, #ff0080);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        section:hover::before {
+            opacity: 0.1;
         }
         
         section h2 {
+            font-family: 'Cinzel', serif;
             color: #ffd700;
-            font-size: 2em;
-            margin-bottom: 20px;
-            font-weight: bold;
-            border-bottom: 2px solid #4a3621;
-            padding-bottom: 10px;
-            letter-spacing: 1px;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            border-bottom: 3px solid transparent;
+            border-image: linear-gradient(90deg, #ffd700, transparent) 1;
+            padding-bottom: 15px;
         }
         
         article {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: rgba(26, 20, 16, 0.5);
-            border-left: 4px solid #8b6f47;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 35px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 5px solid #00ffff;
+            box-shadow: 
+                -5px 0 20px rgba(0, 255, 255, 0.2),
+                inset 0 0 20px rgba(0, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        article:hover {
+            border-left-color: #ff0080;
+            box-shadow: 
+                -5px 0 20px rgba(255, 0, 128, 0.3),
+                inset 0 0 20px rgba(255, 0, 128, 0.05);
+            transform: translateX(10px);
         }
         
         article h3 {
-            color: #d4a574;
+            font-family: 'Orbitron', sans-serif;
+            color: #00ffff;
             margin-bottom: 15px;
-            font-size: 1.5em;
-            font-weight: bold;
+            font-size: 1.8em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
         }
         
         article h3::before {
-            content: "🗡 ";
-            opacity: 0.7;
+            content: '⚔ ';
+            color: #ff0080;
+            text-shadow: 0 0 10px rgba(255, 0, 128, 0.6);
         }
         
         article p {
-            color: #c9b89a;
-            line-height: 1.9;
+            color: #c0c0c0;
+            line-height: 2;
+            font-size: 1.05em;
         }
         
-        .hunter-note {
-            background: rgba(139, 111, 71, 0.1);
-            border: 1px dashed #8b6f47;
-            padding: 15px;
-            margin: 20px 0;
-            font-style: italic;
-            color: #d4a574;
+        article p strong {
+            color: #00ffff;
+            font-weight: 700;
         }
         
-        .hunter-note::before {
-            content: "📝 Hunter's Note: ";
-            font-weight: bold;
+        .decree {
+            background: rgba(255, 215, 0, 0.05);
+            border: 2px solid #ffd700;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1em;
             color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
         }
         
-        .protection-circle {
-            width: 100px;
-            height: 100px;
-            border: 3px solid #8b6f47;
-            border-radius: 50%;
-            margin: 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3em;
-            opacity: 0.3;
+        .grid-line {
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent,
+                #00ffff,
+                #ff0080,
+                #00ffff,
+                transparent
+            );
+            margin: 40px 0;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
         
         footer {
-            background: linear-gradient(180deg, #1a1410 0%, #2d1f14 100%);
-            color: #8b6f47;
+            background: linear-gradient(180deg, rgba(26, 26, 46, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%);
+            color: #888;
             text-align: center;
-            padding: 30px 20px;
-            border-top: 3px solid #8b6f47;
-            margin-top: 50px;
+            padding: 40px 20px;
+            border-top: 2px solid transparent;
+            border-image: linear-gradient(90deg, #00ffff, #ff0080, #00ffff) 1;
+            margin-top: 80px;
+            position: relative;
         }
         
         footer p {
-            margin: 10px 0;
+            margin: 15px 0;
             font-size: 1.1em;
+            letter-spacing: 1px;
         }
         
-        .quote {
+        footer .throne-quote {
+            font-family: 'Cinzel', serif;
             font-style: italic;
-            color: #d4a574;
-            margin-top: 15px;
+            color: #00ffff;
+            font-size: 1.2em;
+            margin-top: 20px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
         }
         
         a {
-            color: #ffd700;
+            color: #ff0080;
             text-decoration: none;
-            transition: color 0.3s ease;
-            border-bottom: 1px dotted #ffd700;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
         }
         
         a:hover {
-            color: #fff;
-            border-bottom-color: #fff;
+            color: #00ffff;
+            border-bottom-color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
         }
         
-        .salt-line {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #8b6f47, transparent);
-            margin: 30px 0;
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            nav a {
+                display: block;
+                margin: 10px 0;
+            }
+            
+            .realm-status {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>🗡 DevSecOps Hunter's Journal 🗡</h1>
-        <div class="subtitle">"Saving Code, Hunting Bugs — The Family Business"</div>
-        <div class="warning">⚠ Beware: Malicious Entities Ahead ⚠</div>
+        <div class="crown">👑</div>
+        <h1>DevSecOps: The Digital Throne</h1>
+        <div class="subtitle">Where Ancient Power Meets Future Tech</div>
+        
+        <div class="realm-status">
+            <div class="stat">
+                <div class="stat-label">System Integrity</div>
+                <div class="stat-value">99.9%</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Defenses Active</div>
+                <div class="stat-value">ONLINE</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">AI Sentinels</div>
+                <div class="stat-value">DEPLOYED</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Threat Level</div>
+                <div class="stat-value" style="color: #ff0080;">SECURED</div>
+            </div>
+        </div>
     </header>
     
     <nav>
-        <a href="#about">The Lore</a>
+        <a href="#about">The Realm</a>
         <a href="#concepts">Arsenal</a>
-        <a href="#contact">Rendezvous</a>
+        <a href="#contact">Council</a>
     </nav>
     
     <main>
         <section id="about">
-            <h2>The Lore</h2>
-            <p>Welcome, hunter. You've stumbled into our world—a realm where artificial intelligence meets the supernatural forces of cybersecurity. Just like the Winchesters hunt monsters, we hunt vulnerabilities, demons of malicious code, and the dark entities that lurk in the shadows of infrastructure.</p>
+            <h2>⚔ Welcome to The Realm ⚔</h2>
+            <p>In a world where kingdoms rise and fall with a single line of code, where ancient wisdom merges with cutting-edge AI, only the strongest survive. Welcome to <strong>The Digital Throne</strong>—where DevSecOps reigns supreme and artificial intelligence guards our borders like dragon fire.</p>
             
-            <div class="hunter-note">
-                In this line of work, you can't trust anyone or anything. But you CAN trust AI-powered security protocols. They never sleep, never blink, and they sure as hell don't make deals with demons.
+            <div class="decree">
+                ⚡ Royal Decree: All Who Enter Must Pledge Allegiance to Security ⚡
             </div>
             
-            <p>We operate in the gray areas—between development and security, between automation and manual vigilance. Our mission? Protect the innocent (your data), vanquish evil (malware and exploits), and make damn sure nothing gets past our defenses. It ain't pretty, but someone's gotta do it.</p>
+            <p>Here, we don't just build systems—we forge empires. With AI as our weapon and automation as our shield, we dominate the battlefield of modern infrastructure. Our neural networks are sharper than Valyrian steel, our algorithms more cunning than any master strategist.</p>
             
-            <div class="salt-line"></div>
+            <div class="grid-line"></div>
             
-            <p><strong>Rule #1:</strong> Always salt and burn your deprecated code. <strong>Rule #2:</strong> Trust your instincts and your AI. <strong>Rule #3:</strong> Family (and your security team) don't end in blood—it ends in brotherhood.</p>
+            <p><strong>The Game of Code has no room for error.</strong> You either secure your kingdom or watch it burn. Every vulnerability is a knife in the dark. Every breach is a betrayal. But with AI-powered defenses and DevSecOps excellence, we don't just survive—we rule.</p>
         </section>
         
         <section id="concepts">
-            <h2>The Hunter's Arsenal</h2>
+            <h2>⚔ The Royal Arsenal ⚔</h2>
             
             <article>
                 <h3>Automated Vulnerability Assessment</h3>
-                <p><strong>Demon Detector:</strong> Like an EMF reader for cyber threats, our AI scans infrastructure faster than a Wendigo on the hunt. It identifies weaknesses, zero-days, and malicious patterns before they can possess your systems. Speed kills—both monsters and exploits.</p>
+                <p><strong>The All-Seeing Eye:</strong> Like the Three-Eyed Raven gazing across time and space, our AI surveillance never sleeps. It scans every corner of your infrastructure, detecting threats before they strike. Vulnerabilities are assassins in the night—but we see them all. From zero-days to legacy exploits, nothing escapes our digital vision. Speed, precision, power—the trifecta of dominance.</p>
             </article>
             
             <article>
                 <h3>Continuous Compliance Monitoring</h3>
-                <p><strong>Angel-Approved Security:</strong> Even Castiel would approve of our compliance protocols. Real-time monitoring, automatic audits, and divine enforcement of security standards. No demon gets past our warding—or our compliance gates. We keep your systems cleaner than holy water.</p>
+                <p><strong>The Iron Law:</strong> Compliance is not optional—it is law. Our AI enforces regulations with the unwavering authority of a king's decree. Real-time audits, automated enforcement, absolute accountability. Just as the Iron Throne demands loyalty, our systems demand adherence. Break the rules? Face the consequences. In the realm of security, there are no second chances.</p>
             </article>
             
             <article>
                 <h3>Intelligent Incident Response</h3>
-                <p><strong>Exorcism Protocol:</strong> When evil strikes, our AI springs into action like Sam and Dean rolling into town. Anomaly detection? Check. Threat containment? Check. Automated countermeasures that would make Bobby Singer proud? Double check. We don't just respond to incidents—we obliterate them.</p>
+                <p><strong>Dragons at the Gate:</strong> When enemies attack, our AI responds with the fury of dragonfire. Instant detection, surgical containment, overwhelming countermeasures. We don't react—we <em>dominate</em>. Anomalies are obliterated before they can spread. Machine learning evolves with every battle, becoming stronger, faster, deadlier. Your enemies will regret the day they challenged your realm.</p>
             </article>
             
             <article>
                 <h3>Predictive Threat Intelligence</h3>
-                <p><strong>The Hunter's Vision:</strong> Some hunters have second sight. Our AI has predictive analytics. By studying patterns, behaviors, and historical data, we see threats before they manifest. It's like having Death's address book—we know what's coming and how to stop it.</p>
+                <p><strong>Whispers of the Future:</strong> The best warriors don't react—they anticipate. Our AI predicts threats days, weeks, even months before they materialize. Behavioral analytics, pattern recognition, probabilistic modeling—we see the battlefield of tomorrow, today. Knowledge is power, and with predictive intelligence, you hold <em>absolute</em> power. Strike first. Strike hard. Leave no survivors.</p>
             </article>
-            
-            <div class="hunter-note">
-                Remember: Knowledge is power. Research saves lives. And backing up your data is just as important as keeping a spare angel blade in the trunk.
-            </div>
         </section>
         
         <section id="contact">
-            <h2>Rendezvous Point</h2>
-            <p>Need backup? Want to join the hunt? Or maybe you've got intel on a new threat? Drop us a line at <a href="mailto:hunters@devsecopsai.com">hunters@devsecopsai.com</a>. We don't check voicemail (too easy to trace), but email works just fine.</p>
+            <h2>⚔ Join the Council ⚔</h2>
+            <p>Do you have what it takes to sit at the table of power? To wield AI like a sword and command infrastructure like an army? Seek an audience with our council at <a href="mailto:throne@devsecopsai.com">throne@devsecopsai.com</a>.</p>
             
-            <div class="protection-circle">⛤</div>
+            <div class="grid-line"></div>
             
-            <p class="quote">"Driver picks the music, shotgun shuts his cake hole. But when it comes to security? Everybody gets a say."</p>
+            <p style="text-align: center; font-size: 1.2em; color: #ffd700; margin-top: 30px;">
+                <strong>"When you play the game of code, you win or you die. There is no middle ground."</strong>
+            </p>
             
-            <div class="salt-line"></div>
-            
-            <p style="text-align: center; margin-top: 20px;"><strong>Stay vigilant. Stay paranoid. And always carry salt.</strong></p>
+            <div class="decree" style="margin-top: 40px;">
+                👑 The Digital Throne Never Sleeps 👑
+            </div>
         </section>
     </main>
     
     <footer>
-        <p>🗡 DevSecOps Hunter's Network 🗡</p>
-        <p style="font-size: 0.9em; margin-top: 10px;">"Saving Code One Server at a Time"</p>
-        <p class="quote" style="margin-top: 15px;">&copy; 2026 - Carry On, Wayward Developers</p>
+        <p style="color: #00ffff; font-weight: bold; font-size: 1.3em;">⚔ THE DIGITAL THRONE ⚔</p>
+        <p>Where AI Reigns Supreme and Security is Absolute</p>
+        <p class="throne-quote">"The realm must be defended. The code must be pure. The throne must endure."</p>
+        <p style="margin-top: 20px; font-size: 0.9em;">&copy; 2026 DevSecOps: The Digital Throne. All Rights Reserved.</p>
     </footer>
 </body>
 </html>
