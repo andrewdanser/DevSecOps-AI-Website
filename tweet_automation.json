@@ -1,0 +1,75 @@
+{
+  "name": "Weekly Twitter Automation",
+  "settings": {},
+  "nodes": [
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "mode": "weekly",
+              "hour": 10,
+              "weekday": "monday"
+            }
+          ]
+        }
+      },
+      "id": "cron-trigger-node",
+      "name": "Weekly Trigger",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4",
+        "prompt": "Generate an interesting and informational tweet about Kubernetes, ElasticSearch, or Ansible in 280 characters or less. The tone should be professional yet approachable.",
+        "maxTokens": 280
+      },
+      "id": "ai-text-generator-node",
+      "name": "AI Tweet Generator",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [400, 300]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "https://api.upload-post.com/api/upload_text",
+        "responseFormat": "json",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "{\"content\": \"{{$node[\"AI Tweet Generator\"].json[\"text\"]}}\"}"
+      },
+      "id": "http-request-node",
+      "name": "Post to Twitter",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [600, 300]
+    }
+  ],
+  "connections": {
+    "Weekly Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Tweet Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Tweet Generator": {
+      "main": [
+        [
+          {
+            "node": "Post to Twitter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
