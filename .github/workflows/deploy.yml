@@ -35,8 +35,7 @@ jobs:
           sudo chown -R $EC2_USER:$EC2_USER /var/www/html
 
           # Configure Nginx for blue-green deployment
-          sudo bash -c "cat > /etc/nginx/sites-available/blue_green << 'CONFIG'
-server {
+          echo "server {
     listen 80;
     server_name www.d3vops.xyz;
 
@@ -58,8 +57,7 @@ server {
     location / {
         try_files \$uri \$uri/ =404;
     }
-}
-CONFIG"
+}" | sudo tee /etc/nginx/sites-available/blue_green > /dev/null
 
           sudo ln -sf /etc/nginx/sites-available/blue_green /etc/nginx/sites-enabled/
           sudo nginx -t
