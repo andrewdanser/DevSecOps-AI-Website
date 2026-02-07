@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevSecOps AI Command</title>
+    <title>DevSecOps Hunter's Journal</title>
     <style>
         * {
             margin: 0;
@@ -12,64 +12,100 @@
         }
         
         body {
-            background-color: #0a0a0a;
+            background-color: #1a1410;
             background-image: 
-                radial-gradient(circle at 20% 50%, rgba(41, 128, 185, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(192, 57, 43, 0.1) 0%, transparent 50%);
-            color: #c0c0c0;
-            font-family: 'Courier New', monospace;
-            line-height: 1.6;
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><text x="50" y="50" font-size="40" text-anchor="middle" opacity="0.03" fill="%23d4a574">⛤</text></svg>'),
+                linear-gradient(180deg, #1a1410 0%, #0d0a08 100%);
+            background-repeat: repeat;
+            color: #d4a574;
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
             min-height: 100vh;
         }
         
         header {
-            background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
-            border-bottom: 3px solid #c9302c;
-            padding: 20px;
+            background: linear-gradient(180deg, #2d1f14 0%, #1a1410 100%);
+            border-bottom: 3px solid #8b6f47;
+            padding: 30px 20px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(201, 48, 44, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+        
+        header::before {
+            content: "🔥";
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            opacity: 0.6;
+        }
+        
+        header::after {
+            content: "🔥";
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            opacity: 0.6;
         }
         
         header h1 {
-            color: #c9302c;
-            font-size: 2.5em;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(201, 48, 44, 0.8), 0 0 20px rgba(201, 48, 44, 0.4);
-            margin-bottom: 5px;
+            color: #d4a574;
+            font-size: 2.8em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            margin-bottom: 10px;
+            font-family: 'Georgia', serif;
         }
         
         .subtitle {
-            color: #5dade2;
-            font-size: 1.1em;
-            letter-spacing: 2px;
+            color: #8b6f47;
+            font-size: 1.2em;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        
+        .warning {
+            background: rgba(139, 0, 0, 0.3);
+            border: 2px solid #8b0000;
+            padding: 10px;
+            margin: 15px auto;
+            max-width: 600px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #ff6b6b;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         nav {
-            background: #1a1a1a;
+            background: #2d1f14;
             text-align: center;
             padding: 15px;
-            border-bottom: 2px solid #2c3e50;
+            border-bottom: 2px solid #4a3621;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
         
         nav a {
-            color: #5dade2;
+            color: #d4a574;
             text-decoration: none;
-            margin: 0 20px;
+            margin: 0 25px;
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 1.1em;
             transition: all 0.3s ease;
-            border: 1px solid transparent;
             padding: 8px 15px;
             display: inline-block;
+            border-bottom: 2px solid transparent;
         }
         
         nav a:hover {
-            color: #c9302c;
-            border-color: #c9302c;
-            text-shadow: 0 0 5px rgba(201, 48, 44, 0.8);
+            color: #ffd700;
+            border-bottom-color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
         
         main {
@@ -79,167 +115,202 @@
         }
         
         section {
-            background: rgba(26, 26, 26, 0.8);
-            border: 2px solid #2c3e50;
-            border-left: 5px solid #c9302c;
+            background: rgba(45, 31, 20, 0.6);
+            border: 2px solid #4a3621;
+            border-left: 5px solid #8b6f47;
             margin-bottom: 30px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            padding: 35px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+        
+        section::before {
+            content: "⛤";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2em;
+            opacity: 0.15;
+            color: #8b6f47;
         }
         
         section h2 {
-            color: #5dade2;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            color: #ffd700;
+            font-size: 2em;
             margin-bottom: 20px;
-            font-size: 1.8em;
-            border-bottom: 2px solid #2c3e50;
+            font-weight: bold;
+            border-bottom: 2px solid #4a3621;
             padding-bottom: 10px;
+            letter-spacing: 1px;
         }
         
         article {
-            margin-bottom: 25px;
-            padding: 20px;
-            background: rgba(44, 62, 80, 0.2);
-            border-left: 3px solid #5dade2;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(26, 20, 16, 0.5);
+            border-left: 4px solid #8b6f47;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
         }
         
         article h3 {
-            color: #c9302c;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #d4a574;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        article h3::before {
+            content: "🗡 ";
+            opacity: 0.7;
         }
         
         article p {
-            color: #c0c0c0;
-            line-height: 1.8;
+            color: #c9b89a;
+            line-height: 1.9;
         }
         
-        .status-bar {
-            background: #1a1a1a;
-            border: 1px solid #c9302c;
+        .hunter-note {
+            background: rgba(139, 111, 71, 0.1);
+            border: 1px dashed #8b6f47;
             padding: 15px;
-            margin-bottom: 30px;
-            font-family: 'Courier New', monospace;
-            text-align: center;
+            margin: 20px 0;
+            font-style: italic;
+            color: #d4a574;
         }
         
-        .status-bar span {
-            color: #5dade2;
-            margin: 0 15px;
+        .hunter-note::before {
+            content: "📝 Hunter's Note: ";
+            font-weight: bold;
+            color: #ffd700;
         }
         
-        .status-bar .active {
-            color: #27ae60;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .protection-circle {
+            width: 100px;
+            height: 100px;
+            border: 3px solid #8b6f47;
+            border-radius: 50%;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            opacity: 0.3;
         }
         
         footer {
-            background: linear-gradient(180deg, #0d0d0d 0%, #1a1a1a 100%);
-            color: #7f8c8d;
+            background: linear-gradient(180deg, #1a1410 0%, #2d1f14 100%);
+            color: #8b6f47;
             text-align: center;
-            padding: 20px;
-            border-top: 3px solid #c9302c;
+            padding: 30px 20px;
+            border-top: 3px solid #8b6f47;
             margin-top: 50px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        }
+        
+        footer p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #d4a574;
+            margin-top: 15px;
         }
         
         a {
-            color: #5dade2;
+            color: #ffd700;
             text-decoration: none;
             transition: color 0.3s ease;
+            border-bottom: 1px dotted #ffd700;
         }
         
         a:hover {
-            color: #c9302c;
+            color: #fff;
+            border-bottom-color: #fff;
         }
         
-        .alert-box {
-            background: rgba(192, 57, 43, 0.1);
-            border: 2px solid #c9302c;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .salt-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8b6f47, transparent);
+            margin: 30px 0;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>⚡ DevSecOps AI Command ⚡</h1>
-        <div class="subtitle">Colonial Defense Network - AI Integration Division</div>
+        <h1>🗡 DevSecOps Hunter's Journal 🗡</h1>
+        <div class="subtitle">"Saving Code, Hunting Bugs — The Family Business"</div>
+        <div class="warning">⚠ Beware: Malicious Entities Ahead ⚠</div>
     </header>
     
-    <div class="status-bar">
-        <span>SYSTEM STATUS:</span>
-        <span class="active">● OPERATIONAL</span>
-        <span>|</span>
-        <span>DEFENSE LEVEL:</span>
-        <span style="color: #f39c12;">CONDITION TWO</span>
-        <span>|</span>
-        <span>AI NODES:</span>
-        <span style="color: #27ae60;">ONLINE</span>
-    </div>
-    
     <nav>
-        <a href="#about">Mission Brief</a>
-        <a href="#concepts">Combat Systems</a>
-        <a href="#contact">Communications</a>
+        <a href="#about">The Lore</a>
+        <a href="#concepts">Arsenal</a>
+        <a href="#contact">Rendezvous</a>
     </nav>
     
     <main>
         <section id="about">
-            <h2>» Mission Brief</h2>
-            <p>Welcome to the Colonial Defense Network's DevSecOps AI Command Center. Our mission is critical: leverage artificial intelligence to fortify our infrastructure against hostile threats, ensure operational security across all systems, and maintain strategic technological superiority.</p>
-            <div class="alert-box">
-                ⚠ PRIORITY DIRECTIVE: ALL SYSTEMS MUST MAINTAIN CONTINUOUS VIGILANCE ⚠
+            <h2>The Lore</h2>
+            <p>Welcome, hunter. You've stumbled into our world—a realm where artificial intelligence meets the supernatural forces of cybersecurity. Just like the Winchesters hunt monsters, we hunt vulnerabilities, demons of malicious code, and the dark entities that lurk in the shadows of infrastructure.</p>
+            
+            <div class="hunter-note">
+                In this line of work, you can't trust anyone or anything. But you CAN trust AI-powered security protocols. They never sleep, never blink, and they sure as hell don't make deals with demons.
             </div>
-            <p>In this era of advanced warfare, AI-driven security protocols are not optional—they are essential for survival. Our integrated defense systems analyze threats in real-time, respond with precision, and adapt to emerging attack vectors before they can compromise our operations.</p>
+            
+            <p>We operate in the gray areas—between development and security, between automation and manual vigilance. Our mission? Protect the innocent (your data), vanquish evil (malware and exploits), and make damn sure nothing gets past our defenses. It ain't pretty, but someone's gotta do it.</p>
+            
+            <div class="salt-line"></div>
+            
+            <p><strong>Rule #1:</strong> Always salt and burn your deprecated code. <strong>Rule #2:</strong> Trust your instincts and your AI. <strong>Rule #3:</strong> Family (and your security team) don't end in blood—it ends in brotherhood.</p>
         </section>
         
         <section id="concepts">
-            <h2>» Combat Systems & Tactical AI</h2>
+            <h2>The Hunter's Arsenal</h2>
             
             <article>
-                <h3>⚡ Automated Vulnerability Assessment</h3>
-                <p><strong>THREAT DETECTION PROTOCOL:</strong> Advanced AI algorithms conduct continuous deep-scans of our infrastructure, identifying vulnerabilities faster than any human analyst. Our neural networks simulate attack patterns from potential adversaries, predicting breach attempts before they occur. Time is survival—every second counts in space combat and cyber warfare.</p>
+                <h3>Automated Vulnerability Assessment</h3>
+                <p><strong>Demon Detector:</strong> Like an EMF reader for cyber threats, our AI scans infrastructure faster than a Wendigo on the hunt. It identifies weaknesses, zero-days, and malicious patterns before they can possess your systems. Speed kills—both monsters and exploits.</p>
             </article>
             
             <article>
-                <h3>⚡ Continuous Compliance Monitoring</h3>
-                <p><strong>REGULATORY ENFORCEMENT SYSTEM:</strong> The Colonial Fleet operates under strict security regulations. Our AI-driven compliance engines monitor every system component 24/7, ensuring adherence to military-grade security protocols. Automated audits, real-time reporting, and instant remediation keep our defensive posture at maximum readiness.</p>
+                <h3>Continuous Compliance Monitoring</h3>
+                <p><strong>Angel-Approved Security:</strong> Even Castiel would approve of our compliance protocols. Real-time monitoring, automatic audits, and divine enforcement of security standards. No demon gets past our warding—or our compliance gates. We keep your systems cleaner than holy water.</p>
             </article>
             
             <article>
-                <h3>⚡ Intelligent Incident Response</h3>
-                <p><strong>COMBAT INFORMATION CENTER:</strong> When hostile action is detected, our AI command systems initiate immediate response protocols. Anomaly detection, threat classification, automated containment, and tactical countermeasures deploy in milliseconds. Our machine learning models study every engagement, evolving defensive strategies to counter future attacks.</p>
+                <h3>Intelligent Incident Response</h3>
+                <p><strong>Exorcism Protocol:</strong> When evil strikes, our AI springs into action like Sam and Dean rolling into town. Anomaly detection? Check. Threat containment? Check. Automated countermeasures that would make Bobby Singer proud? Double check. We don't just respond to incidents—we obliterate them.</p>
             </article>
             
             <article>
-                <h3>⚡ Predictive Threat Intelligence</h3>
-                <p><strong>STRATEGIC DEFENSE NETWORK:</strong> By analyzing patterns across vast data streams, our AI predicts emerging threats before they materialize. Behavioral analysis, pattern recognition, and probabilistic modeling give us the tactical advantage—seeing the enemy's move before they make it.</p>
+                <h3>Predictive Threat Intelligence</h3>
+                <p><strong>The Hunter's Vision:</strong> Some hunters have second sight. Our AI has predictive analytics. By studying patterns, behaviors, and historical data, we see threats before they manifest. It's like having Death's address book—we know what's coming and how to stop it.</p>
             </article>
+            
+            <div class="hunter-note">
+                Remember: Knowledge is power. Research saves lives. And backing up your data is just as important as keeping a spare angel blade in the trunk.
+            </div>
         </section>
         
         <section id="contact">
-            <h2>» Communications Channel</h2>
-            <p><strong>COMMAND FREQUENCY:</strong> For intelligence briefings, tactical coordination, or to join our defense operations, establish secure communications at <a href="mailto:command@devsecopsai.com">command@devsecopsai.com</a>.</p>
-            <p style="margin-top: 15px; color: #5dade2;"><em>"The price of freedom is eternal vigilance."</em> — Colonial Defense Command</p>
+            <h2>Rendezvous Point</h2>
+            <p>Need backup? Want to join the hunt? Or maybe you've got intel on a new threat? Drop us a line at <a href="mailto:hunters@devsecopsai.com">hunters@devsecopsai.com</a>. We don't check voicemail (too easy to trace), but email works just fine.</p>
+            
+            <div class="protection-circle">⛤</div>
+            
+            <p class="quote">"Driver picks the music, shotgun shuts his cake hole. But when it comes to security? Everybody gets a say."</p>
+            
+            <div class="salt-line"></div>
+            
+            <p style="text-align: center; margin-top: 20px;"><strong>Stay vigilant. Stay paranoid. And always carry salt.</strong></p>
         </section>
     </main>
     
     <footer>
-        <p>⬢ Colonial Defense Network - DevSecOps AI Division ⬢</p>
-        <p style="margin-top: 10px; font-size: 0.9em;">&copy; 2026 - SO SAY WE ALL</p>
+        <p>🗡 DevSecOps Hunter's Network 🗡</p>
+        <p style="font-size: 0.9em; margin-top: 10px;">"Saving Code One Server at a Time"</p>
+        <p class="quote" style="margin-top: 15px;">&copy; 2026 - Carry On, Wayward Developers</p>
     </footer>
 </body>
 </html>
