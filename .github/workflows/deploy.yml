@@ -32,7 +32,7 @@ jobs:
 
           # Set up directories for blue-green deployment
           sudo mkdir -p /var/www/html/blue /var/www/html/green
-          sudo chown -R $USER:$USER /var/www/html
+          sudo chown -R $EC2_USER:$EC2_USER /var/www/html
 
           # Configure Nginx for blue-green deployment
           sudo bash -c "cat > /etc/nginx/sites-available/blue_green << 'CONFIG'
