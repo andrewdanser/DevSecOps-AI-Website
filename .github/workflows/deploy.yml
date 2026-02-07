@@ -80,7 +80,7 @@ jobs:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo certbot --nginx -d www.d3vops.xyz -d staging.d3vops.xyz --non-interactive --agree-tos --email admin@d3vops.xyz && sudo systemctl reload nginx'
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo certbot --nginx -d www.d3vops.xyz -d staging.d3vops.xyz --non-interactive --agree-tos --expand --email admin@d3vops.xyz && sudo systemctl reload nginx'
 
     - name: Manual Approval to Switch Live Environment
       uses: hmarr/auto-approve-action@v3.1.0
