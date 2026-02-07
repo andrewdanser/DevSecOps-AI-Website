@@ -1,4 +1,4 @@
-name: Deploy to AWS
+name: Deploy to AWS with SSL
 
 on:
   push:
@@ -10,44 +10,51 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
 
-      - name: Install dependencies on server
-        env:
-          EC2_HOST: ${{ secrets.EC2_HOST }}
-          EC2_USER: ${{ secrets.EC2_USER }}
-        run: |
-          ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
-            sudo apt update
-            sudo apt install -y nginx git nodejs npm
-            sudo systemctl enable nginx
-            sudo systemctl start nginx
-          EOF
+    - name: Install dependencies and Nginx on server
+      env:
+        EC2_HOST: ${{ secrets.EC2_HOST }}
+        EC2_USER: ${{ secrets.EC2_USER }}
+      run: |
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
+          sudo apt update
+          sudo apt install -y nginx git nodejs npm certbot python3-certbot-nginx
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+        EOF
 
-      - name: Deploy website to server
-        env:
-          EC2_HOST: ${{ secrets.EC2_HOST }}
-          EC2_USER: ${{ secrets.EC2_USER }}
-        run: |
-          ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
-            sudo mkdir -p /var/www/html
-            sudo chown -R $USER:$USER /var/www/html
-          EOF
-          scp -o StrictHostKeyChecking=no -r * $EC2_USER@$EC2_HOST:/var/www/html/
+    - name: Deploy website to server
+      env:
+        EC2_HOST: ${{ secrets.EC2_HOST }}
+        EC2_USER: ${{ secrets.EC2_USER }}
+      run: |
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
+          sudo mkdir -p /var/www/html
+          sudo chown -R $USER:$USER /var/www/html
+        EOF
+        scp -o StrictHostKeyChecking=no -r * $EC2_USER@$EC2_HOST:/var/www/html/
 
-      - name: Restart Nginx
-        env:
-          EC2_HOST: ${{ secrets.EC2_HOST }}
-          EC2_USER: ${{ secrets.EC2_USER }}
-        run: |
-          ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
-            sudo nginx -t
-            sudo systemctl restart nginx
-          EOF
+    - name: Configure SSL with Let’s Encrypt
+      env:
+        EC2_HOST: ${{ secrets.EC2_HOST }}
+        EC2_USER: ${{ secrets.EC2_USER }}
+      run: |
+        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
+          sudo certbot --nginx -d www.d3vops.xyz --non-interactive --agree-tos --email admin@d3vops.xyz
+          sudo systemctl reload nginx
+        EOF
+
+    - name: Test Deployment
+      env:
+        EC2_HOST: ${{ secrets.EC2_HOST }}
+        EC2_USER: ${{ secrets.EC2_USER }}
+      run: |
+        ssh -o "StrictHostKeyChecking=no" $EC2_USER@$EC2_HOST curl -I http://www.d3vops.xyz
