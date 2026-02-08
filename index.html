@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevSecOps - The Digital Throne</title>
+    <title>Colonial AI Defense Network | DevSecOps Command</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Orbitron:wght@400;700;900&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
@@ -14,156 +12,180 @@
         }
         
         body {
-            background: #0a0e27;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 255, 255, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(255, 0, 128, 0.05) 0%, transparent 40%),
-                linear-gradient(180deg, #0a0e27 0%, #1a1a2e 50%, #0a0e27 100%);
+            background: #0a0a0f;
             color: #e0e0e0;
-            font-family: 'Orbitron', sans-serif;
-            line-height: 1.8;
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
             overflow-x: hidden;
         }
         
-        header {
-            background: linear-gradient(180deg, rgba(10, 14, 39, 0.95) 0%, rgba(26, 26, 46, 0.95) 100%);
-            border-bottom: 2px solid transparent;
-            border-image: linear-gradient(90deg, #00ffff, #ff0080, #00ffff) 1;
-            padding: 40px 20px;
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><rect fill="%23111" width="1920" height="1080"/><circle cx="960" cy="540" r="300" fill="%232c3e50" opacity="0.1"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
+            border-bottom: 3px solid #c9302c;
         }
         
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
-            animation: pulse 8s ease-in-out infinite;
+        .hero-content {
+            z-index: 2;
+            max-width: 900px;
+            padding: 20px;
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.2); opacity: 0.6; }
-        }
-        
-        header h1 {
-            font-family: 'Cinzel', serif;
-            color: #00ffff;
-            font-size: 3.5em;
-            font-weight: 900;
-            letter-spacing: 4px;
+        .hero h1 {
+            font-size: 4em;
+            color: #c9302c;
             text-transform: uppercase;
-            text-shadow: 
-                0 0 10px rgba(0, 255, 255, 0.8),
-                0 0 20px rgba(0, 255, 255, 0.6),
-                0 0 30px rgba(0, 255, 255, 0.4),
-                0 5px 10px rgba(0, 0, 0, 0.9);
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px rgba(201, 48, 44, 0.8), 0 0 40px rgba(201, 48, 44, 0.4);
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
         }
         
-        .crown {
-            font-size: 1.5em;
-            color: #ffd700;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(201, 48, 44, 0.8), 0 0 40px rgba(201, 48, 44, 0.4); }
+            to { text-shadow: 0 0 30px rgba(201, 48, 44, 1), 0 0 60px rgba(201, 48, 44, 0.6); }
         }
         
-        .subtitle {
-            font-family: 'Cinzel', serif;
-            color: #ff0080;
-            font-size: 1.3em;
-            font-style: italic;
+        .hero .tagline {
+            font-size: 1.8em;
+            color: #5dade2;
+            text-transform: uppercase;
             letter-spacing: 3px;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(255, 0, 128, 0.6);
-            position: relative;
-            z-index: 1;
+            margin-bottom: 30px;
         }
         
-        .realm-status {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #00ffff;
-            padding: 15px;
-            margin: 20px auto;
-            max-width: 800px;
+        .hero .mission-brief {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #c9302c, #8b0000);
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border: 2px solid #c9302c;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(201, 48, 44, 0.5);
+        }
+        
+        .cta-button:hover {
+            background: linear-gradient(135deg, #8b0000, #c9302c);
+            box-shadow: 0 0 30px rgba(201, 48, 44, 0.8);
+            transform: translateY(-3px);
+        }
+        
+        /* Status Bar */
+        .status-bar {
+            background: rgba(20, 20, 30, 0.95);
+            border-bottom: 2px solid #2c3e50;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .status-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-around;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-        
-        .realm-status .stat {
-            display: flex;
-            flex-direction: column;
             align-items: center;
+            flex-wrap: wrap;
+            padding: 0 20px;
         }
         
-        .realm-status .stat-label {
-            font-size: 0.8em;
+        .status-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 15px;
+        }
+        
+        .status-label {
             color: #888;
             text-transform: uppercase;
+            font-size: 0.85em;
             letter-spacing: 1px;
+            margin-right: 10px;
         }
         
-        .realm-status .stat-value {
-            font-size: 1.2em;
-            color: #00ffff;
+        .status-value {
+            color: #5dade2;
             font-weight: bold;
-            margin-top: 5px;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+            font-size: 1em;
         }
         
+        .status-value.online {
+            color: #27ae60;
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #27ae60;
+            margin-right: 8px;
+            animation: pulse-dot 2s infinite;
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; box-shadow: 0 0 10px #27ae60; }
+            50% { opacity: 0.5; box-shadow: 0 0 5px #27ae60; }
+        }
+        
+        /* Navigation */
         nav {
-            background: rgba(10, 14, 39, 0.9);
-            text-align: center;
-            padding: 20px;
-            border-bottom: 1px solid #00ffff;
-            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.1);
+            background: rgba(30, 30, 40, 0.95);
+            padding: 20px 0;
+            border-bottom: 1px solid #2c3e50;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
         nav a {
-            color: #00ffff;
+            color: #5dade2;
             text-decoration: none;
-            margin: 0 30px;
-            font-weight: 700;
-            font-size: 1.1em;
+            padding: 10px 30px;
+            margin: 5px;
             text-transform: uppercase;
+            font-weight: bold;
             letter-spacing: 2px;
-            transition: all 0.3s ease;
-            padding: 10px 20px;
-            display: inline-block;
             border: 2px solid transparent;
-            position: relative;
-        }
-        
-        nav a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #00ffff, #ff0080);
-            transform: translateX(-50%);
-            transition: width 0.3s ease;
+            transition: all 0.3s ease;
+            display: block;
         }
         
         nav a:hover {
-            color: #ff0080;
-            text-shadow: 0 0 15px rgba(255, 0, 128, 0.8);
+            color: #c9302c;
+            border-color: #c9302c;
+            background: rgba(201, 48, 44, 0.1);
         }
         
-        nav a:hover::before {
-            width: 100%;
-        }
-        
+        /* Main Content */
         main {
             max-width: 1400px;
             margin: 0 auto;
@@ -171,14 +193,11 @@
         }
         
         section {
-            background: rgba(26, 26, 46, 0.7);
-            border: 2px solid transparent;
-            border-image: linear-gradient(135deg, #00ffff, transparent, #ff0080) 1;
-            margin-bottom: 50px;
-            padding: 40px;
-            box-shadow: 
-                0 10px 40px rgba(0, 0, 0, 0.5),
-                inset 0 0 30px rgba(0, 255, 255, 0.05);
+            margin-bottom: 80px;
+            padding: 60px 40px;
+            background: rgba(30, 30, 40, 0.8);
+            border-left: 5px solid #c9302c;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             position: relative;
             overflow: hidden;
         }
@@ -186,257 +205,394 @@
         section::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(135deg, #00ffff, transparent, #ff0080);
-            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(201, 48, 44, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        section h2 {
+            font-size: 2.5em;
+            color: #5dade2;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 15px;
+            position: relative;
+        }
+        
+        section h2::before {
+            content: '▸';
+            color: #c9302c;
+            margin-right: 15px;
+        }
+        
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .card {
+            background: rgba(44, 62, 80, 0.3);
+            border: 1px solid #2c3e50;
+            border-left: 4px solid #5dade2;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(93, 173, 226, 0.1) 0%, transparent 50%);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
         
-        section:hover::before {
-            opacity: 0.1;
+        .card:hover {
+            transform: translateY(-5px);
+            border-left-color: #c9302c;
+            box-shadow: 0 10px 30px rgba(201, 48, 44, 0.3);
         }
         
-        section h2 {
-            font-family: 'Cinzel', serif;
-            color: #ffd700;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-            border-bottom: 3px solid transparent;
-            border-image: linear-gradient(90deg, #ffd700, transparent) 1;
-            padding-bottom: 15px;
+        .card:hover::before {
+            opacity: 1;
         }
         
-        article {
-            margin-bottom: 35px;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.4);
-            border-left: 5px solid #00ffff;
-            box-shadow: 
-                -5px 0 20px rgba(0, 255, 255, 0.2),
-                inset 0 0 20px rgba(0, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-        
-        article:hover {
-            border-left-color: #ff0080;
-            box-shadow: 
-                -5px 0 20px rgba(255, 0, 128, 0.3),
-                inset 0 0 20px rgba(255, 0, 128, 0.05);
-            transform: translateX(10px);
-        }
-        
-        article h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: #00ffff;
-            margin-bottom: 15px;
-            font-size: 1.8em;
-            font-weight: 700;
+        .card h3 {
+            font-size: 1.6em;
+            color: #c9302c;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+            margin-bottom: 15px;
         }
         
-        article h3::before {
-            content: '⚔ ';
-            color: #ff0080;
-            text-shadow: 0 0 10px rgba(255, 0, 128, 0.6);
+        .card p {
+            color: #ccc;
+            line-height: 1.8;
         }
         
-        article p {
-            color: #c0c0c0;
-            line-height: 2;
-            font-size: 1.05em;
+        /* Image Sections */
+        .image-section {
+            margin: 60px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
         }
         
-        article p strong {
-            color: #00ffff;
-            font-weight: 700;
+        .image-section img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
         
-        .decree {
-            background: rgba(255, 215, 0, 0.05);
-            border: 2px solid #ffd700;
-            padding: 25px;
+        /* Alert Box */
+        .alert-box {
+            background: rgba(201, 48, 44, 0.1);
+            border: 2px solid #c9302c;
+            padding: 20px;
             margin: 30px 0;
             text-align: center;
-            font-family: 'Cinzel', serif;
-            font-size: 1.1em;
-            color: #ffd700;
+            font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            color: #c9302c;
+            box-shadow: 0 0 20px rgba(201, 48, 44, 0.2);
         }
         
-        .grid-line {
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent,
-                #00ffff,
-                #ff0080,
-                #00ffff,
-                transparent
-            );
-            margin: 40px 0;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-        
+        /* Footer */
         footer {
-            background: linear-gradient(180deg, rgba(26, 26, 46, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%);
+            background: rgba(20, 20, 30, 0.95);
             color: #888;
             text-align: center;
             padding: 40px 20px;
-            border-top: 2px solid transparent;
-            border-image: linear-gradient(90deg, #00ffff, #ff0080, #00ffff) 1;
+            border-top: 3px solid #c9302c;
             margin-top: 80px;
-            position: relative;
         }
         
         footer p {
-            margin: 15px 0;
-            font-size: 1.1em;
+            margin: 10px 0;
             letter-spacing: 1px;
         }
         
-        footer .throne-quote {
-            font-family: 'Cinzel', serif;
+        .footer-quote {
             font-style: italic;
-            color: #00ffff;
-            font-size: 1.2em;
+            color: #5dade2;
+            font-size: 1.1em;
             margin-top: 20px;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
         }
         
-        a {
-            color: #ff0080;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid transparent;
-        }
-        
-        a:hover {
-            color: #00ffff;
-            border-bottom-color: #00ffff;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
-        }
-        
+        /* Responsive */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
+            .hero h1 {
+                font-size: 2.5em;
             }
             
-            nav a {
-                display: block;
-                margin: 10px 0;
+            .hero .tagline {
+                font-size: 1.3em;
             }
             
-            .realm-status {
+            section {
+                padding: 40px 20px;
+            }
+            
+            .status-container {
                 flex-direction: column;
-                gap: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="crown">👑</div>
-        <h1>DevSecOps: The Digital Throne</h1>
-        <div class="subtitle">Where Ancient Power Meets Future Tech</div>
-        
-        <div class="realm-status">
-            <div class="stat">
-                <div class="stat-label">System Integrity</div>
-                <div class="stat-value">99.9%</div>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>⚡ Colonial AI Defense Network ⚡</h1>
+            <div class="tagline">DevSecOps Command - Tactical AI Integration</div>
+            <p class="mission-brief">
+                In the vastness of digital space, threats emerge from every vector. 
+                Our mission: Deploy AI-powered defense systems to protect infrastructure, 
+                eliminate vulnerabilities, and maintain operational superiority. 
+                The future of security is here.
+            </p>
+            <a href="#systems" class="cta-button">Access Systems</a>
+        </div>
+    </div>
+    
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-container">
+            <div class="status-item">
+                <div class="status-indicator"></div>
+                <span class="status-label">System Status:</span>
+                <span class="status-value online">OPERATIONAL</span>
             </div>
-            <div class="stat">
-                <div class="stat-label">Defenses Active</div>
-                <div class="stat-value">ONLINE</div>
+            <div class="status-item">
+                <span class="status-label">Defense Level:</span>
+                <span class="status-value" style="color: #f39c12;">CONDITION TWO</span>
             </div>
-            <div class="stat">
-                <div class="stat-label">AI Sentinels</div>
-                <div class="stat-value">DEPLOYED</div>
+            <div class="status-item">
+                <span class="status-label">AI Nodes:</span>
+                <span class="status-value online">12 ACTIVE</span>
             </div>
-            <div class="stat">
-                <div class="stat-label">Threat Level</div>
-                <div class="stat-value" style="color: #ff0080;">SECURED</div>
+            <div class="status-item">
+                <span class="status-label">Threat Assessment:</span>
+                <span class="status-value online">SECURE</span>
             </div>
         </div>
-    </header>
+    </div>
     
+    <!-- Navigation -->
     <nav>
-        <a href="#about">The Realm</a>
-        <a href="#concepts">Arsenal</a>
-        <a href="#contact">Council</a>
+        <ul>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#systems">Systems</a></li>
+            <li><a href="#capabilities">Capabilities</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
     
+    <!-- Main Content -->
     <main>
-        <section id="about">
-            <h2>⚔ Welcome to The Realm ⚔</h2>
-            <p>In a world where kingdoms rise and fall with a single line of code, where ancient wisdom merges with cutting-edge AI, only the strongest survive. Welcome to <strong>The Digital Throne</strong>—where DevSecOps reigns supreme and artificial intelligence guards our borders like dragon fire.</p>
-            
-            <div class="decree">
-                ⚡ Royal Decree: All Who Enter Must Pledge Allegiance to Security ⚡
-            </div>
-            
-            <p>Here, we don't just build systems—we forge empires. With AI as our weapon and automation as our shield, we dominate the battlefield of modern infrastructure. Our neural networks are sharper than Valyrian steel, our algorithms more cunning than any master strategist.</p>
-            
-            <div class="grid-line"></div>
-            
-            <p><strong>The Game of Code has no room for error.</strong> You either secure your kingdom or watch it burn. Every vulnerability is a knife in the dark. Every breach is a betrayal. But with AI-powered defenses and DevSecOps excellence, we don't just survive—we rule.</p>
-        </section>
-        
-        <section id="concepts">
-            <h2>⚔ The Royal Arsenal ⚔</h2>
-            
-            <article>
-                <h3>Automated Vulnerability Assessment</h3>
-                <p><strong>The All-Seeing Eye:</strong> Like the Three-Eyed Raven gazing across time and space, our AI surveillance never sleeps. It scans every corner of your infrastructure, detecting threats before they strike. Vulnerabilities are assassins in the night—but we see them all. From zero-days to legacy exploits, nothing escapes our digital vision. Speed, precision, power—the trifecta of dominance.</p>
-            </article>
-            
-            <article>
-                <h3>Continuous Compliance Monitoring</h3>
-                <p><strong>The Iron Law:</strong> Compliance is not optional—it is law. Our AI enforces regulations with the unwavering authority of a king's decree. Real-time audits, automated enforcement, absolute accountability. Just as the Iron Throne demands loyalty, our systems demand adherence. Break the rules? Face the consequences. In the realm of security, there are no second chances.</p>
-            </article>
-            
-            <article>
-                <h3>Intelligent Incident Response</h3>
-                <p><strong>Dragons at the Gate:</strong> When enemies attack, our AI responds with the fury of dragonfire. Instant detection, surgical containment, overwhelming countermeasures. We don't react—we <em>dominate</em>. Anomalies are obliterated before they can spread. Machine learning evolves with every battle, becoming stronger, faster, deadlier. Your enemies will regret the day they challenged your realm.</p>
-            </article>
-            
-            <article>
-                <h3>Predictive Threat Intelligence</h3>
-                <p><strong>Whispers of the Future:</strong> The best warriors don't react—they anticipate. Our AI predicts threats days, weeks, even months before they materialize. Behavioral analytics, pattern recognition, probabilistic modeling—we see the battlefield of tomorrow, today. Knowledge is power, and with predictive intelligence, you hold <em>absolute</em> power. Strike first. Strike hard. Leave no survivors.</p>
-            </article>
-        </section>
-        
-        <section id="contact">
-            <h2>⚔ Join the Council ⚔</h2>
-            <p>Do you have what it takes to sit at the table of power? To wield AI like a sword and command infrastructure like an army? Seek an audience with our council at <a href="mailto:throne@devsecopsai.com">throne@devsecopsai.com</a>.</p>
-            
-            <div class="grid-line"></div>
-            
-            <p style="text-align: center; font-size: 1.2em; color: #ffd700; margin-top: 30px;">
-                <strong>"When you play the game of code, you win or you die. There is no middle ground."</strong>
+        <!-- Mission Section -->
+        <section id="mission">
+            <h2>Mission Brief</h2>
+            <p style="font-size: 1.2em; line-height: 1.9; color: #ccc;">
+                Welcome to the Colonial AI Defense Network. In an era where cyber threats evolve at light speed, 
+                traditional security measures are no longer sufficient. We've integrated artificial intelligence 
+                into every layer of our DevSecOps infrastructure, creating an autonomous defense system that 
+                learns, adapts, and protects around the clock.
             </p>
             
-            <div class="decree" style="margin-top: 40px;">
-                👑 The Digital Throne Never Sleeps 👑
+            <div class="alert-box">
+                ⚠ PRIORITY DIRECTIVE: CONTINUOUS VIGILANCE IS MANDATORY ⚠
+            </div>
+            
+            <p style="font-size: 1.1em; line-height: 1.9; color: #ccc; margin-top: 30px;">
+                Our neural networks analyze millions of data points per second, identifying anomalies before 
+                they become threats. Machine learning algorithms predict attack vectors with unprecedented 
+                accuracy. Automated response systems neutralize hostile actions in milliseconds. This is the 
+                future of security—intelligent, proactive, unstoppable.
+            </p>
+        </section>
+        
+        <!-- Systems Section -->
+        <section id="systems">
+            <h2>Combat Information Center</h2>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3>⚡ Automated Vulnerability Assessment</h3>
+                    <p>
+                        Our AI-powered scanners conduct continuous deep analysis of infrastructure, 
+                        identifying weaknesses faster than any human team. Neural networks simulate 
+                        attack patterns, predicting potential breach points before adversaries can 
+                        exploit them. Every vulnerability detected is cataloged, prioritized, and 
+                        remediated automatically.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3>⚡ Continuous Compliance Monitoring</h3>
+                    <p>
+                        Regulatory compliance is enforced 24/7 through intelligent automation. 
+                        Our systems monitor every configuration change, access request, and data 
+                        flow against military-grade security standards. Real-time audits ensure 
+                        zero deviation from protocol. Automated reporting keeps command informed 
+                        at all times.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3>⚡ Intelligent Incident Response</h3>
+                    <p>
+                        When threats are detected, our AI command systems initiate immediate 
+                        countermeasures. Advanced anomaly detection identifies hostile activity 
+                        in real-time. Automated containment protocols isolate compromised systems. 
+                        Machine learning models evolve defensive strategies with every engagement, 
+                        ensuring continuous improvement.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3>⚡ Predictive Threat Intelligence</h3>
+                    <p>
+                        By analyzing behavioral patterns across vast data streams, our AI predicts 
+                        emerging threats before they materialize. Probabilistic modeling gives us 
+                        tactical advantage—we see enemy movements before they're executed. Pattern 
+                        recognition identifies sophisticated attacks that would evade traditional systems.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Capabilities Section -->
+        <section id="capabilities">
+            <h2>Operational Capabilities</h2>
+            <p style="font-size: 1.1em; line-height: 1.9; color: #ccc; margin-bottom: 40px;">
+                The Colonial AI Defense Network represents the pinnacle of DevSecOps innovation. 
+                Our integrated systems provide comprehensive protection across all operational domains:
+            </p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Real-Time Threat Detection</h3>
+                    <p>
+                        Millisecond response times to emerging threats through neural network analysis 
+                        and behavioral monitoring.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3>Autonomous Defense Systems</h3>
+                    <p>
+                        Self-healing infrastructure that identifies, isolates, and neutralizes attacks 
+                        without human intervention.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3>Zero-Trust Architecture</h3>
+                    <p>
+                        Every request verified, every transaction authenticated, every access point 
+                        continuously monitored.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3>Adaptive Learning</h3>
+                    <p>
+                        Systems that evolve with each encounter, becoming more effective against 
+                        sophisticated adversaries.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Establish Communications</h2>
+            <p style="font-size: 1.2em; line-height: 1.9; color: #ccc; text-align: center;">
+                For intelligence briefings, tactical coordination, or to join our defense operations, 
+                establish secure communications through official channels.
+            </p>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 1.3em; color: #5dade2; font-weight: bold;">
+                    COMMAND FREQUENCY: <a href="mailto:command@devsecopsai.com" style="color: #c9302c; text-decoration: none; border-bottom: 2px solid #c9302c;">command@devsecopsai.com</a>
+                </p>
+            </div>
+            
+            <div class="alert-box" style="margin-top: 40px;">
+                "The price of freedom is eternal vigilance" - Colonial Defense Command
             </div>
         </section>
     </main>
     
+    <!-- Footer -->
     <footer>
-        <p style="color: #00ffff; font-weight: bold; font-size: 1.3em;">⚔ THE DIGITAL THRONE ⚔</p>
-        <p>Where AI Reigns Supreme and Security is Absolute</p>
-        <p class="throne-quote">"The realm must be defended. The code must be pure. The throne must endure."</p>
-        <p style="margin-top: 20px; font-size: 0.9em;">&copy; 2026 DevSecOps: The Digital Throne. All Rights Reserved.</p>
+        <p style="font-size: 1.3em; font-weight: bold; color: #5dade2;">⬢ Colonial AI Defense Network ⬢</p>
+        <p style="margin-top: 10px;">DevSecOps Command - Tactical AI Integration Division</p>
+        <p class="footer-quote">"So say we all."</p>
+        <p style="margin-top: 20px; font-size: 0.9em;">&copy; 2026 Colonial Defense Network. All rights reserved.</p>
     </footer>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add parallax effect to hero
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            const scrolled = window.pageYOffset;
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+        
+        // Animate cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(30px)';
+                    setTimeout(() => {
+                        entry.target.style.transition = 'all 0.6s ease';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
