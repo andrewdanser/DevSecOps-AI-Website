@@ -1,0 +1,36 @@
+# Memory files - may contain sensitive information
+memory/
+MEMORY.md
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# API keys and secrets
+*_config.json
+secrets/
+*.key
+*.pem
+
+# Temporary files
+*.log
+*.tmp
+.DS_Store
+
+# Node modules (if you add any JS tooling later)
+node_modules/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build outputs
+dist/
+build/
+
+# SSH keys
+*.pub
+id_rsa*
