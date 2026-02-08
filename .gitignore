@@ -18,6 +18,8 @@ USER.md
 
 # API keys and secrets
 *_config.json
+n8n_config.json
+tweet_automation.json
 secrets/
 *.key
 *.pem
@@ -29,6 +31,13 @@ secrets/
 
 # Node modules (if you add any JS tooling later)
 node_modules/
+
+# Python virtual environments
+git_filter_repo_env/
+venv/
+env/
+*.pyc
+__pycache__/
 
 # IDE files
 .vscode/
