@@ -1,8 +1,8 @@
-# Memory files - may contain sensitive information
+# ==========================================
+# OpenClaw Workspace Files - NEVER commit these
+# ==========================================
 memory/
 MEMORY.md
-
-# OpenClaw workspace config files
 AGENTS.md
 BOOTSTRAP.md
 HEARTBEAT.md
@@ -10,8 +10,11 @@ IDENTITY.md
 SOUL.md
 TOOLS.md
 USER.md
+PROJECTS.md
 
-# Environment files
+# ==========================================
+# Sensitive Data & Credentials
+# ==========================================
 .env
 .env.local
 .env.*.local
