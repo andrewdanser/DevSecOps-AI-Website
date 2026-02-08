@@ -562,12 +562,7 @@
             });
         });
         
-        // Add parallax effect to hero
-        window.addEventListener('scroll', () => {
-            const hero = document.querySelector('.hero');
-            const scrolled = window.pageYOffset;
-            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-        });
+        // Parallax effect disabled to prevent visual artifacts
         
         // Animate cards on scroll
         const observerOptions = {
