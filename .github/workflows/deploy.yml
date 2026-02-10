@@ -15,17 +15,21 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Set up SSH
+      env:
+        EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        EC2_HOST: ${{ secrets.EC2_HOST }}
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+        printf '%s\n' "$EC2_SSH_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H $EC2_HOST >> ~/.ssh/known_hosts 2>/dev/null
 
     - name: Install dependencies and Nginx on server
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -o ServerAliveCountMax=10 $EC2_USER@$EC2_HOST << 'EOF'
+        ssh -i ~/.ssh/id_rsa -o ServerAliveInterval=30 -o ServerAliveCountMax=10 $EC2_USER@$EC2_HOST << 'EOF'
           sudo DEBIAN_FRONTEND=noninteractive apt-get update -y
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nginx git certbot python3-certbot-nginx
           sudo systemctl enable nginx
@@ -37,21 +41,22 @@ jobs:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo mkdir -p /var/www/html/blue /var/www/html/green && sudo chown -R www-data:www-data /var/www/html && sudo chmod -R 755 /var/www/html'
+        ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST 'sudo mkdir -p /var/www/html/blue /var/www/html/green && sudo chown -R www-data:www-data /var/www/html && sudo chmod -R 755 /var/www/html'
 
     - name: Configure Nginx for blue-green deployment
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo tee /etc/nginx/sites-available/blue_green > /dev/null <<NGINX_CONFIG
+        ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST << 'SSHEOF'
+          sudo tee /etc/nginx/sites-available/blue_green > /dev/null <<'NGINX_CONFIG'
         server {
             listen 80;
             server_name www.d3vops.xyz;
             root /var/www/html/blue;
             index index.html;
             location / {
-                try_files \$uri \$uri/ =404;
+                try_files $uri $uri/ =404;
             }
         }
         server {
@@ -60,41 +65,41 @@ jobs:
             root /var/www/html/green;
             index index.html;
             location / {
-                try_files \$uri \$uri/ =404;
+                try_files $uri $uri/ =404;
             }
         }
         NGINX_CONFIG
-        '
+        SSHEOF
 
     - name: Enable Nginx configuration
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo ln -sf /etc/nginx/sites-available/blue_green /etc/nginx/sites-enabled/ && sudo rm -f /etc/nginx/sites-enabled/default && sudo nginx -t && sudo systemctl reload nginx'
+        ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST 'sudo ln -sf /etc/nginx/sites-available/blue_green /etc/nginx/sites-enabled/ && sudo rm -f /etc/nginx/sites-enabled/default && sudo nginx -t && sudo systemctl reload nginx'
 
     - name: Deploy to Green environment
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo mkdir -p /var/www/html/green'
-        scp -o StrictHostKeyChecking=no -r ./* $EC2_USER@$EC2_HOST:/tmp/green_deployment/
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo rm -rf /var/www/html/green/* && sudo cp -r /tmp/green_deployment/* /var/www/html/green/ && sudo chown -R www-data:www-data /var/www/html/green && sudo chmod -R 755 /var/www/html/green && sudo rm -rf /tmp/green_deployment'
+        ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST 'mkdir -p /tmp/green_deployment'
+        scp -i ~/.ssh/id_rsa -r ./* $EC2_USER@$EC2_HOST:/tmp/green_deployment/
+        ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST 'sudo rm -rf /var/www/html/green/* && sudo cp -r /tmp/green_deployment/* /var/www/html/green/ && sudo chown -R www-data:www-data /var/www/html/green && sudo chmod -R 755 /var/www/html/green && sudo rm -rf /tmp/green_deployment'
 
     - name: Verify Green deployment
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'ls -la /var/www/html/green/ && cat /var/www/html/green/index.html | head -20'
+        ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST 'ls -la /var/www/html/green/ && cat /var/www/html/green/index.html | head -20'
 
     - name: Configure SSL for blue and green environments
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo certbot --nginx -d www.d3vops.xyz -d staging.d3vops.xyz --non-interactive --agree-tos --expand --email admin@d3vops.xyz && sudo systemctl reload nginx'
+        ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST 'sudo certbot --nginx -d www.d3vops.xyz -d staging.d3vops.xyz --non-interactive --agree-tos --expand --email admin@d3vops.xyz && sudo systemctl reload nginx'
 
   switch-to-green:
     runs-on: ubuntu-latest
@@ -103,21 +108,25 @@ jobs:
 
     steps:
     - name: Set up SSH
+      env:
+        EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        EC2_HOST: ${{ secrets.EC2_HOST }}
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+        printf '%s\n' "$EC2_SSH_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H $EC2_HOST >> ~/.ssh/known_hosts 2>/dev/null
 
     - name: Switch Live Environment (Blue to Green)
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo rm -rf /var/www/html/blue_bak && sudo mv /var/www/html/blue /var/www/html/blue_bak && sudo cp -r /var/www/html/green /var/www/html/blue && sudo chown -R www-data:www-data /var/www/html/blue && sudo chmod -R 755 /var/www/html/blue && sudo nginx -t && sudo systemctl reload nginx'
+        ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST 'sudo rm -rf /var/www/html/blue_bak && sudo mv /var/www/html/blue /var/www/html/blue_bak && sudo cp -r /var/www/html/green /var/www/html/blue && sudo chown -R www-data:www-data /var/www/html/blue && sudo chmod -R 755 /var/www/html/blue && sudo nginx -t && sudo systemctl reload nginx'
 
     - name: Verify Blue is now live
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'ls -la /var/www/html/blue/ && cat /var/www/html/blue/index.html | head -20'
+        ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST 'ls -la /var/www/html/blue/ && cat /var/www/html/blue/index.html | head -20'
