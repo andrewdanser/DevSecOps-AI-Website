@@ -25,7 +25,12 @@ jobs:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo apt update && sudo apt install -y nginx git nodejs npm certbot python3-certbot-nginx && sudo systemctl enable nginx && sudo systemctl start nginx'
+        ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -o ServerAliveCountMax=10 $EC2_USER@$EC2_HOST << 'EOF'
+          sudo DEBIAN_FRONTEND=noninteractive apt-get update -y
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nginx git certbot python3-certbot-nginx
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+        EOF
 
     - name: Setup blue-green directories
       env:
