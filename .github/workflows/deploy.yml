@@ -24,6 +24,24 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H $EC2_HOST >> ~/.ssh/known_hosts 2>/dev/null
 
+    - name: Debug SSH key
+      env:
+        EC2_HOST: ${{ secrets.EC2_HOST }}
+        EC2_USER: ${{ secrets.EC2_USER }}
+      run: |
+        echo "Key file permissions:"
+        ls -la ~/.ssh/id_rsa
+        echo "Key file type:"
+        head -1 ~/.ssh/id_rsa
+        echo "Key file line count:"
+        wc -l ~/.ssh/id_rsa
+        echo "Key fingerprint:"
+        ssh-keygen -lf ~/.ssh/id_rsa 2>&1 || echo "Invalid key format"
+        echo "EC2_USER: $EC2_USER"
+        echo "EC2_HOST: $EC2_HOST"
+        echo "Attempting verbose SSH..."
+        ssh -vvv -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o ConnectTimeout=15 $EC2_USER@$EC2_HOST echo "connected" 2>&1 || true
+
     - name: Install dependencies and Nginx on server
       env:
         EC2_HOST: ${{ secrets.EC2_HOST }}
