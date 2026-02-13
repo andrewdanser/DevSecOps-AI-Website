@@ -1,5 +1,6 @@
 {
-  "dependencies": {
-    "node-fetch": "^2.7.0"
-  }
+  "scripts": {
+    "start": "npx http-server"
+  },
+  "dependencies": {}
 }

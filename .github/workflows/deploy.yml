@@ -48,28 +48,8 @@ jobs:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         EC2_USER: ${{ secrets.EC2_USER }}
       run: |
-        ssh -i ~/.ssh/id_ed25519 $EC2_USER@$EC2_HOST << 'SSHEOF'
-          sudo tee /etc/nginx/sites-available/blue_green > /dev/null <<'NGINX_CONFIG'
-        server {
-            listen 80;
-            server_name www.d3vops.xyz;
-            root /var/www/html/blue;
-            index index.html;
-            location / {
-                try_files $uri $uri/ =404;
-            }
-        }
-        server {
-            listen 80;
-            server_name staging.d3vops.xyz;
-            root /var/www/html/green;
-            index index.html;
-            location / {
-                try_files $uri $uri/ =404;
-            }
-        }
-        NGINX_CONFIG
-        SSHEOF
+        scp -i ~/.ssh/id_ed25519 nginx.conf $EC2_USER@$EC2_HOST:/tmp/nginx.conf
+        ssh -i ~/.ssh/id_ed25519 $EC2_USER@$EC2_HOST 'sudo mv /tmp/nginx.conf /etc/nginx/sites-available/blue_green && sudo chown root:root /etc/nginx/sites-available/blue_green'
 
     - name: Enable Nginx configuration
       env:
